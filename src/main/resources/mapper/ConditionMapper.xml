@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianxi.dao.ConditionDao">
+    <!--建立结果集映射关系-->
+    <resultMap id="ConditionMap" type="com.lianxi.entity.Condition">
+        <id property="conditionId" column="condition_id"></id>
+        <result property="cellphoneId" column="cellphone_id"></result>
+        <result property="branchId" column="branch_id"></result>
+        <result property="conditionMoney" column="condition_money"></result>
+    </resultMap>
+    <sql id="Condition">
+        condition_id,cellphone_id,branch_id,condition_money
+    </sql>
+</mapper>

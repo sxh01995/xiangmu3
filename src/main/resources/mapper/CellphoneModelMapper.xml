@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianxi.dao.CellphoneModelDao">
+    <!--建立结果集映射关系-->
+    <resultMap id="CeMap" type="com.lianxi.entity.CellphoneModel">
+        <id property="modelId" column="model_id"></id>
+        <result property="modelName" column="model_name"></result>
+    </resultMap>
+    <sql id="ce">
+        model_id,model_name
+    </sql>
+    <!--查询所有-->
+    <select id="findAll" resultMap="CeMap">
+        SELECT
+        <include refid="ce"></include>
+        FROM cellphone_model
+    </select>
+</mapper>

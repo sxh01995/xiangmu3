@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianxi.dao.RecycleDao">
+    <!--建立结果集映射关系-->
+    <resultMap id="RecycleMap" type="com.lianxi.entity.Recycle">
+        <id property="recycleId" column="recycle_id"></id>
+        <result property="recycleName" column="recycle_name"></result>
+    </resultMap>
+    <sql id="Recycle">
+        recycle_id,recycle_name
+    </sql>
+    <select id="findAll" resultMap="RecycleMap">
+        SELECT DISTINCT
+            r.recycle_name,
+            r.recycle_id
+        FROM
+            `condition` AS c
+        INNER JOIN recycle_branch AS rb ON c.branch_id = rb.branch_id
+        INNER JOIN recycle AS r ON rb.recycle_id = r.recycle_id
+        WHERE
+            c.cellphone_id = #{cellphoneId}
+    </select>
+</mapper>

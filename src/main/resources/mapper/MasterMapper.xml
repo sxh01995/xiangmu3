@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianxi.dao.MasterDao">
+    <!--建立结果集映射关系-->
+    <resultMap id="masterMap" type="com.lianxi.entity.Master">
+        <id property="masterId" column="master_id"></id>
+        <result property="masterNumber" column="master_number"></result>
+        <result property="masterPassword" column="master_password"></result>
+        <result property="masterUsername" column="master_username"></result>
+        <result property="masterSalt" column="master_salt"></result>
+    </resultMap>
+    <sql id="master">
+        master_id,master_number,master_password,master_username,master_salt
+    </sql>
+    <select id="findByNumber" resultMap="masterMap">
+      SELECT
+      <include refid="master"></include>
+      FROM master
+      WHERE master_number=#{number}
+    </select>
+</mapper>

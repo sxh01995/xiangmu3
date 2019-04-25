@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianxi.dao.RecycleBranchDao">
+    <!--建立结果集映射关系-->
+    <resultMap id="RecycleBranchMap" type="com.lianxi.entity.RecycleBranch">
+        <id property="sortId" column="sort_id"></id>
+        <result property="branchId" column="branch_id"></result>
+        <result property="recycleId" column="recycle_id"></result>
+        <result property="branchName" column="branch_name"></result>
+        <result property="branchDescribe" column="branch_describe"></result>
+    </resultMap>
+    <resultMap id="HelperMap" type="com.lianxi.entity.Helper">
+        <id property="branchId" column="branch_id"></id>
+        <result property="branchName" column="branch_name"></result>
+        <result property="branchDescribe" column="branch_describe"></result>
+        <result property="conditionMoney" column="condition_money"></result>
+    </resultMap>
+    <sql id="RecycleBranch">
+        sort_id,branch_name,branch_describe
+    </sql>
+    <select id="findById" resultMap="RecycleBranchMap">
+        SELECT
+        rb.branch_describe,
+        rb.branch_id,
+        rb.sort_id,
+        rb.branch_name
+        FROM
+        recycle_branch AS rb
+        INNER JOIN `condition` AS c ON c.branch_id = rb.branch_id
+        INNER JOIN recycle ON rb.recycle_id = recycle.recycle_id
+        WHERE c.cellphone_id=#{cellphoneId} AND rb.recycle_id=#{recycleId}
+    </select>
+    <select id="findHelp" resultMap="HelperMap">
+        SELECT
+        rb.branch_id,
+        rb.branch_name,
+        rb.branch_describe,
+        c.condition_money
+        FROM
+        recycle_branch AS rb
+        INNER JOIN `condition` AS c ON c.branch_id = rb.branch_id
+        WHERE sort_id in
+        <foreach collection="array" open="(" close=")" separator=" , " item="value">
+            #{value}
+        </foreach>
+    </select>
+</mapper>

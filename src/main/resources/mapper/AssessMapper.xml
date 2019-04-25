@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lianxi.dao.AssessDao">
+    <!--建立结果集映射关系-->
+    <resultMap id="AssessMap" type="com.lianxi.entity.Assess">
+        <id property="assessId" column="assess_id"></id>
+        <result property="cellphoneId" column="cellphone_id"></result>
+        <result property="assessPrice" column="assess_price"></result>
+        <result property="assessCellphone" column="assess_cellphone"/>
+    </resultMap>
+    <sql id="Assess">
+        assess_id,
+        cellphone_id,
+        assess_price,
+        assess_cellphone
+    </sql>
+    <select id="findId" resultMap="AssessMap">
+        SELECT
+        <include refid="Assess"></include>
+        FROM
+        assess
+        WHERE assess_id=#{id}
+    </select>
+    <insert id="save" parameterType="java.lang.Integer">
+        INSERT INTO assess
+        <trim prefix="(" suffixOverrides=",">
+            <if test="assessId!=null">
+                assess_id,
+            </if>
+            <if test="cellphoneId!=null">
+                cellphone_id,
+            </if>
+            <if test="assessPrice!=null">
+                assess_price,
+            </if>
+            <if test="assessCellphone!=null">
+                assess_cellphone
+            </if>
+            <trim prefix=") VALUES (" suffix=")" suffixOverrides=",">
+                <if test="assessId!=null">
+                    #{assessId},
+                </if>
+                <if test="cellphoneId!=null">
+                    #{cellphoneId},
+                </if>
+                <if test="assessPrice!=null">
+                    #{assessPrice},
+                </if>
+                <if test="assessCellphone!=null">
+                    #{assessCellphone}
+                </if>
+            </trim>
+        </trim>
+    </insert>
+</mapper>
