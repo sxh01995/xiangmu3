@@ -102,11 +102,11 @@ public class AssistImp implements AssistService {
 //            获取手机的信息
             Cellphone cellphone = cellphoneDao.findId(cId);
 //           计算折损后的价格
-            Integer result= (int) (cellphone.getCellphonePrice()*coe);
+            Integer result= (int) (cellphone.getCellphonePrice()*(1-coe));
 //            创建随机ID
             String[] uuid = UUID.randomUUID().toString().split("-");
 //            添加数据
-            Integer save = assessDao.save(new Assess(uuid[0], cellphone.getCellphoneId(), result, message));
+            Integer save = assessDao.save(new Assess(uuid[0], cellphone.getCellphoneId(), result, message,cellphone.getCellphoneImg()));
             System.out.println(save);
             if(save>0){
                 return uuid[0];

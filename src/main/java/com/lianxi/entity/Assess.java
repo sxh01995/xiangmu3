@@ -10,4 +10,5 @@ public class Assess {
   private Integer cellphoneId;
   private Integer assessPrice;
   private String assessCellphone;
+  private String cellphoneImg;
 }

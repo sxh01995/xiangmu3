@@ -21,7 +21,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springfr
 
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/pages/"></property>
-        <property name="suffix" value=".jsp"></property>
+        <property name="suffix" value=".html"></property>
     </bean>
     <!--<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager"/>-->
 </beans>

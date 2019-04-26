@@ -8,12 +8,14 @@
         <result property="cellphoneId" column="cellphone_id"></result>
         <result property="assessPrice" column="assess_price"></result>
         <result property="assessCellphone" column="assess_cellphone"/>
+        <result property="cellphoneImg" column="cellphone_img"></result>
     </resultMap>
     <sql id="Assess">
         assess_id,
         cellphone_id,
         assess_price,
-        assess_cellphone
+        assess_cellphone,
+        cellphone_img
     </sql>
     <select id="findId" resultMap="AssessMap">
         SELECT
@@ -35,7 +37,10 @@
                 assess_price,
             </if>
             <if test="assessCellphone!=null">
-                assess_cellphone
+                assess_cellphone,
+            </if>
+            <if test="cellphoneImg!=null">
+                cellphone_img
             </if>
             <trim prefix=") VALUES (" suffix=")" suffixOverrides=",">
                 <if test="assessId!=null">
@@ -48,7 +53,10 @@
                     #{assessPrice},
                 </if>
                 <if test="assessCellphone!=null">
-                    #{assessCellphone}
+                    #{assessCellphone},
+                </if>
+                <if test="cellphoneImg!=null">
+                    #{cellphoneImg}
                 </if>
             </trim>
         </trim>
